@@ -1,29 +1,52 @@
-export { default as GetMap } from "./GetMap";
-export { default as DashboardCard } from "./DashboardCard";
-export { default as Breadcrumb } from "./Breadcrumb";
-export { default as BackdropLoader } from "./backDropLoader";
-export { default as TableV2 } from "./TableV2";
-export { default as CustomTabs } from "./Tabs";
-export { default as SkeletonLoader } from "./Skeleton";
-export { default as CustomTable } from "./Table";
-export { default as CustomSelect } from "./RadiusSelect";
-export { default as CustomInput } from "./Input";
-export { default as InfoPane } from "./InfoPane";
-export { default as TabPane } from "./TabPane";
-export { default as CustomModal } from "./Modal";
-export { default as AddBtn } from "./addBtn";
-export { default as StatusCard } from "./statusCard";
-export { default as CustomPagination } from "./pagination";
-export { default as SearchInput } from "./searchInput";
-export { default as AlertCard } from "./alertCard";
-export { default as BtnGroup } from "./btnGroup";
-export { default as ChartCard } from "./chartCard";
-export { default as LocationStatusCard } from "./locationStatusCard";
-export { default as ParameterCard } from "./parameterCard";
-export { default as ExportAsCSV } from "./ExportAsCSV";
-export { default as LineChart } from "./lineChart";
-export { default as CustomLabel } from "./Label";
-export { default as SidebarSmall } from "./Sidebar/sidebarSmall";
-export { default as HeaderAdmin } from "./Header/adminHeader";
-export { default as Sidebar } from "./Sidebar/sidebar";
-export { default as ProfileMenu } from "./Header/ProfileDropdown";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
+import { MapContentProvider } from "./context/MapPageContext";
+import { CollarContextProvider } from "./context/CollarContext";
+import { LivestockContextProvider } from "./context/LivestockContext";
+import { ProfileContextProvider } from "./context/profileContext";
+import { AuthContextProvider } from "./context/AuthContext";
+import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import "./assets/css/style.css";
+import "./assets/css/header.css";
+import "./index.css";
+import App from "./App";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#B58B5D",
+    },
+  },
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+    >
+      <AuthContextProvider>
+      <MapContentProvider>
+        <CollarContextProvider>
+          <LivestockContextProvider>
+            <ProfileContextProvider>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Routes>
+                  <Route path="/*" element={<App />} />
+                </Routes>
+              </ThemeProvider>
+            </ProfileContextProvider>
+          </LivestockContextProvider>
+        </CollarContextProvider>
+      </MapContentProvider>
+      </AuthContextProvider>
+    </SnackbarProvider>
+  </BrowserRouter>
+);

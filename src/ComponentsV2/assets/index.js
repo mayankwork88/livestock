@@ -1,0 +1,9 @@
+export { default as ClientImg } from "./images/Client.png";
+export { default as GatewayImg } from "./images/Gateway.png";
+export { default as DeviceImg } from "./images/Device.png";
+export { default as BMImg } from "./images/bm.png";
+export { default as Logo } from "./logo.png";
+export { default as Mark } from "./images/cow1.png";
+export { default as RejectImg } from "./rejected.png";
+export { default as SuccesImg } from "./SuccessImg.png";
+export { default as Cow } from "./cow-img.webp";
